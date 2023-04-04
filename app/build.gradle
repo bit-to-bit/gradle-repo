@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+jar {
+    jar.archiveBaseName = "myName"
+    manifest {
+        attributes 'Main-Class': 'org.java.dev.App'
+    }
+    from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+}
+application {
+    mainClass = 'org.java.dev.App'
+}
